@@ -1,0 +1,83 @@
+﻿@page "/"
+<h3>Login</h3>
+@using System.ComponentModel.DataAnnotations
+@using XamarinMauiProject.Models;
+@using XamarinMauiProject.Services;
+@inject NavigationManager NavigationManager
+@inject IAppService appService
+
+<EditForm Model="@loginModel" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    
+                    <MudTextField Label="User Name" Class="mt-3"
+                    @bind-Value="loginModel.Username" For="@(() => loginModel.Username)" />
+                    <MudTextField Label="Password" Class="mt-3"
+                    @bind-Value="loginModel.Password" For="@(() => loginModel.Password)" InputType="InputType.Password" />
+                   
+                </MudCardContent>
+
+                <MudButton OnClick="@Navigate" Style="font-size:12px;text-decoration:underline;color:darkblue;text-transform:capitalize;">Click here to create new account. </MudButton>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@NavigateSuccess">Login</MudButton>
+                  
+                </MudCardActions>
+             
+            </MudCard>
+        </MudItem>
+      
+    </MudGrid>
+</EditForm>
+@code {
+
+    LoginModel loginModel = new();
+
+    private void Navigate()
+    {
+        try {
+
+            NavigationManager.NavigateTo("registration");
+        }catch(Exception ex)
+        {
+            string a = ex.Message;
+        }
+    }
+    private void NavigateSuccess()
+    {
+        try
+        {
+
+            NavigationManager.NavigateTo("products");
+        }
+        catch (Exception ex)
+        {
+            string a = ex.Message;
+        }
+    }
+
+    private async void OnValidSubmit(EditContext context)
+    {
+
+        try
+        {
+            var response = await appService.AuthenticateUser(loginModel);
+            if (!string.IsNullOrWhiteSpace(response))
+            {
+                await App.Current.MainPage.DisplayAlert("Success", "Successfully entered","OK");
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error occurred", "Invalid username or password","OK");
+            }
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            string a = ex.Message;
+        }
+    }
+
+}

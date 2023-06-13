@@ -1,0 +1,187 @@
+﻿@page "/products"
+@page "/update_products/{ProductID:int}"
+
+@using XamarinMauiProject.Services;
+@inject IProductService productService
+<h3>Products</h3>
+<MudExpansionPanels>
+    <MudExpansionPanel Text="Panel 1" MaxHeight="650">
+        <MudCard>
+            <MudCardMedia Image="images/royalcanin.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" @bind-Text="title">Royal Canin</MudText>
+                <MudText Typo="Typo.body2" @bind-Text="description">2kg Kitten kedi maması</MudText>
+                <MudText Typo="Typo.body2" @bind-Value="price">391.40TL</MudText> 
+               
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@AddShoppingCard">Sepete ekle</MudButton>
+         
+            </MudCardActions>
+        </MudCard>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel 2" MaxHeight="500">
+        <MudCard>
+            <MudCardMedia Image="images/nd.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" @bind-Text="title">N&D</MudText>
+                <MudText Typo="Typo.body2" @bind-Text="description">10kg Somonlu Kısırlaştırılmış mama </MudText>
+                <MudText Typo="Typo.body2" @bind-Value="price">1646.50TL</MudText>
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@AddShoppingCard">Sepete ekle</MudButton>
+
+            </MudCardActions>
+        </MudCard>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel 3" MaxHeight="1000">
+        <MudCard>
+            <MudCardMedia Image="images/hills.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" @bind-Text="title">Hills</MudText>
+                <MudText Typo="Typo.body2" @bind-Text="description">1.5kg Kitten kedi ton balıklı maması</MudText>
+                <MudText Typo="Typo.body2" @bind-Value="price">295.26TL</MudText>
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@AddShoppingCard">Sepete ekle</MudButton>
+
+            </MudCardActions>
+        </MudCard>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel 4">
+        <MudCard>
+            <MudCardMedia Image="images/advance.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" @bind-Text="title">Advance</MudText>
+                <MudText Typo="Typo.body2" @bind-Text="description">3kg somonlu kısırlaştırılmış maması</MudText>
+                <MudText Typo="Typo.body2" @bind-Value="price">630.63TL</MudText>
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@AddShoppingCard">Sepete ekle</MudButton>
+
+            </MudCardActions>
+        </MudCard>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel 5" MaxHeight="150">
+        <MudCard>
+            <MudCardMedia Image="images/felicia.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" @bind-Text="title">Felicia</MudText>
+                <MudText Typo="Typo.body2" @bind-Text="description">12kg Düşük tahıllı hipoalerjenik somonlu kısırlaştırılmış kedi maması</MudText>
+                <MudText Typo="Typo.body2" @bind-Value="price">1279.50TL</MudText>
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@AddShoppingCard">Sepete ekle</MudButton>
+
+            </MudCardActions>
+        </MudCard>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel 6" MaxHeight="500">
+        <MudCard>
+            <MudCardMedia Image="images/britcare.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" @bind-Text="title">Brit Care</MudText>
+                <MudText Typo="Typo.body2" @bind-Text="description">7kg Brit Care Tahılsız Hipoalejenik Kilo Kontrolü için Ördekli Kısırlaştırılmış Kedi Maması </MudText>
+                <MudText Typo="Typo.body2" @bind-Value="price">906.50TL</MudText>
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@AddShoppingCard">Sepete ekle</MudButton>
+
+            </MudCardActions>
+        </MudCard>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel 7" MaxHeight="1000">
+        <MudCard>
+            <MudCardMedia Image="images/proplan.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" @bind-Text="title">Proplan</MudText>
+                <MudText Typo="Typo.body2" @bind-Text="description">10kg Yetişkin kedi maması</MudText>
+                <MudText Typo="Typo.body2" @bind-Value="price">1818.00TL</MudText>
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@AddShoppingCard">Sepete ekle</MudButton>
+
+            </MudCardActions>
+        </MudCard>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel 8">
+        <MudCard>
+            <MudCardMedia Image="images/spectrum.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" @bind-Text="title">Spectrum</MudText>
+                <MudText Typo="Typo.body2" @bind-Text="description">2kg Spectrum Düşük Tahıllı Somon, Hamsi ve Yaban Mersinli Yetişkin Kedi Maması</MudText>
+                <MudText Typo="Typo.body2" @bind-Value="price">322.50TL</MudText>
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@AddShoppingCard">Sepete ekle</MudButton>
+
+            </MudCardActions>
+        </MudCard>
+    </MudExpansionPanel>
+</MudExpansionPanels>
+@code {
+    [Parameter]
+    public int ProductID { get; set; }
+    private string title;
+    private string description;
+    private decimal price;
+    
+
+    protected  async override Task OnInitializedAsync()
+    {
+        if (ProductID > 0)
+        {
+            var response = await productService.GetProductByID(ProductID);
+            if (response != null)
+            {
+                title = response.Title;
+                description = response.Description;
+                price = response.Price;
+
+            }
+        }
+    }
+    private async  Task AddShoppingCard()
+    {
+        var productModel =new Models.ProductsModel
+            {
+
+                Title=title,
+                Description = description,
+                Price = price
+            }; 
+        int response = -1;
+        if (ProductID > 0)
+        {
+            response = await productService.UpdateProduct(productModel);
+            //update record
+        }
+        else
+        {
+            response = await productService.AddProduct(productModel);
+            //add record
+        }
+
+
+        if (response > 0)
+        {
+            title =description= string.Empty;
+            price = 0;
+            this.StateHasChanged();
+            await App.Current.MainPage.DisplayAlert("Record Saved",
+            "Record Saved Succesfully", "OK");
+        }
+        else
+        {
+            await App.Current.MainPage.DisplayAlert("Oops",
+           "Something went wrong while adding record", "OK");
+        }
+    }
+}

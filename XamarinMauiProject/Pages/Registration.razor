@@ -1,0 +1,72 @@
+﻿@page "/registration"
+@using System.ComponentModel.DataAnnotations
+@using XamarinMauiProject.Models;
+@inject NavigationManager NavigationManager
+@inject IAppService appService
+
+<h3>Registration</h3>
+
+
+<EditForm Model="@registrationModel" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="First name" HelperText="Max. 8 characters"
+                    @bind-Value="registrationModel.Username" For="@(() => registrationModel.Username)" />
+                    <MudTextField Label="Email" Class="mt-3"
+                    @bind-Value="registrationModel.Email" For="@(() => registrationModel.Email)" />
+                    <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
+                    @bind-Value="registrationModel.Password" For="@(() => registrationModel.Password)" InputType="InputType.Password" />
+                    <MudTextField Label="Password" HelperText="Repeat the password" Class="mt-3"
+                    @bind-Value="registrationModel.Password2" For="@(() => registrationModel.Password2)" InputType="InputType.Password" />
+                </MudCardContent>
+                <MudButton OnClick="@Navigate" Style="font-size:12px;text-decoration:underline;color:darkblue;text-transform:capitalize;">Already have account? </MudButton>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        
+    </MudGrid>
+</EditForm>
+@code {
+    RegistrationModel registrationModel = new();
+    bool success;
+    private void Navigate()
+    {
+        try {
+            NavigationManager.NavigateTo("/");
+        } catch(Exception ex)
+        {
+            string a = ex.Message;
+        }
+    }
+    
+
+    
+        private async void OnValidSubmit(EditContext context)
+        {
+
+            try
+            {
+            var response = await appService.RegisterUser(registrationModel);
+                if (response.IsSuccess)
+                {
+                    await App.Current.MainPage.DisplayAlert("Success", "User successfully registered", "OK");
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Error occurred", response.ErrorMessage, "OK");
+                }
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                string a = ex.Message;
+            }
+        }
+    
+
+}
